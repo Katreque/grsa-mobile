@@ -7,8 +7,12 @@ import { NavController } from 'ionic-angular';
 })
 export class AboutPage {
 
+  ip: string;
   constructor(public navCtrl: NavController) {
 
   }
 
+  getIp() {
+    return this.ip;
+  }
 }

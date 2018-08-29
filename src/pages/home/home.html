@@ -6,14 +6,40 @@
 
 <ion-content padding>
   <ion-row>
-    <ion-col text-center>
+    <ion-col col-12 text-center>
       <h1>Speed Test</h1>
 
-      <p>Consulta no SQL Server</p>
+      <ion-label color="primary">Consulta no SQL Server</ion-label>
       <button ion-button block (click)="sqlServerRun()">Run!</button>
 
-      <p>Consulta no Neo4j</p>
-      <button ion-button block>Run!</button>
+      <strong>
+        <ion-label style="font-size: 18px" *ngIf="sqlServer.isLoading">Carregando...</ion-label>
+      </strong>
+
+      <strong>
+        <ion-label style="font-size: 18px" *ngIf="sqlServer.tempoTotal">{{sqlServer.tempoTotal}} milissegundos</ion-label>
+      </strong>
+
+      <strong>
+        <ion-label style="font-size: 18px; color: red" *ngIf="sqlServer.erro">{{sqlServer.erro}}</ion-label>
+      </strong>
+    </ion-col>
+
+    <ion-col col-12 text-center>
+      <ion-label color="primary">Consulta no Neo4j</ion-label>
+      <button ion-button block (click)="NeoServerRun()">Run!</button>
+
+      <strong>
+        <ion-label style="font-size: 18px" *ngIf="NeoServer.isLoading">Carregando...</ion-label>
+      </strong>
+  
+      <strong>
+        <ion-label style="font-size: 18px" *ngIf="NeoServer.tempoTotal">{{NeoServer.tempoTotal}} milissegundos</ion-label>
+      </strong>
+
+      <strong>
+          <ion-label style="font-size: 18px; color: red" *ngIf="NeoServer.erro">{{NeoServer.erro}}</ion-label>
+        </strong>
     </ion-col>
   </ion-row>
 </ion-content>
