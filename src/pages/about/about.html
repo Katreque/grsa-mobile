@@ -11,7 +11,7 @@
     <ion-col col-12 text-center>
       <ion-item>
         <ion-label color="primary" stacked>Digite o IP do Server</ion-label>
-        <ion-input type="number" placeholder="IP" ng-bind="ip"></ion-input>
+        <ion-input type="text" placeholder="IP" [(ngModel)]="ip" (ionChange)="sendIp()"></ion-input>
       </ion-item>
     </ion-col>
   </ion-row> 

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-//import About from '../about/about';
+import { Events } from 'ionic-angular';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+
 export class HomePage {
 
   sqlServer = {
@@ -24,18 +25,28 @@ export class HomePage {
     erro: undefined
   }
 
-  ip: string
-
-  constructor(public navCtrl: NavController) {
-    //this.ip = About.getIp();
+  ip: string = undefined;
+  constructor(public navCtrl: NavController, public events: Events) {
+    this.events.subscribe('pegaIpRede', (ip) => {
+      this.ip = ip;
+    });
   }
 
   sqlServerRun() {
     this.sqlServer.isLoading = true;
     this.sqlServer.erro = undefined;
     this.sqlServer.timeInicial = new Date();
+
     fetch('http://'+this.ip+':1337/ssms-criar')
-      .then(() => {
+      .then((res) => {
+        res.json()
+          .then((resp) => {
+            console.log(resp);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+
         this.sqlServer.timeFinal = new Date();
         this.sqlServer.tempoTotal = this.sqlServer.timeFinal.getTime() - this.sqlServer.timeInicial.getTime();
         this.sqlServer.isLoading = false;

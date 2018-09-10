@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { Events } from 'ionic-angular';
 
 @Component({
   selector: 'page-about',
@@ -8,11 +9,11 @@ import { NavController } from 'ionic-angular';
 export class AboutPage {
 
   ip: string;
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public events: Events) {
 
   }
 
-  getIp() {
-    return this.ip;
+  sendIp() {
+    this.events.publish('pegaIpRede', this.ip);
   }
 }
